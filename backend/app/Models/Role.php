@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 
+/**
+ * @method static inRandomOrder()
+ */
 class Role extends Model
 {
     use HasFactory, HasUuids;

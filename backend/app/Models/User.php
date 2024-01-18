@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
-
-class User extends Authenticatable
+class User extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
@@ -72,7 +70,7 @@ class User extends Authenticatable
         return $this->hasOne(Role::class);
     }
 
-    public function artist(): BelongsToMany
+    public function artists(): BelongsToMany
     {
         return $this->belongsToMany(Artist::class);
 
@@ -83,3 +81,5 @@ class User extends Authenticatable
         return $this->belongsTo(Review::class);
     }
 }
+
+

@@ -26,7 +26,7 @@ class Speciality extends Model
         'name',
     ];
 
-    public function artist(): BelongsToMany
+    public function artists(): BelongsToMany
     {
         return $this->belongsToMany(Artist::class);
     }

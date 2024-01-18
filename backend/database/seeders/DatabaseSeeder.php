@@ -4,7 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Address;
+use App\Models\Category;
+use App\Models\Color;
+use App\Models\Material;
 use App\Models\Role;
+use App\Models\Size;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
        // AddressFactory
 
-        //Address::factory(5)->create();
+        //Address::factory(10)->create();
 
         // AddressFactory
 
@@ -27,18 +31,28 @@ class DatabaseSeeder extends Seeder
 
         // UserFactory
 
-//        User::factory(10)->create();
-//        User::factory()->unverified()->create();
+        //User::factory(10)->create();
 
-        $user= User::factory()->has(Address::factory()->count(3))->create();
-        $addresses = Address::factory(10)->create();
-        foreach ($addresses as $address ){
+        // CategoryFactory
 
-        User::factory()
-            ->hasAttached(User::factory())
-            ->create([
-            'address_id'=>$address->id
-        ]);
-    }
+        Category::factory(10)->create();
+
+        // ColorFactory
+
+        Color::factory(10)->create();
+
+        // SizeFactory
+
+        Size::factory(10)->create();
+
+        // MaterialFactory
+
+        Material::factory(10)->create();
+
+        // SpecialityFactory
+
+
+
+
     }
 }
