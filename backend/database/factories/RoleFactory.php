@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Address>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Role>
  */
-class AddressFactory extends Factory
+class RoleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +19,7 @@ class AddressFactory extends Factory
     {
         return [
             'id' => fake()->uuid(),
-            'street' => fake()->streetAddress(),
-            'ZIPCode' => fake()->postcode(),
-            'city'=> fake()->city(),
-            'countryCode' => fake()->countryCode(),
+            'type' => fake()->randomElement(['admin', 'artist', 'client'])
         ];
     }
 }
