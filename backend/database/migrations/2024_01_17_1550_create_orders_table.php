@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('orderNum');
             $table->boolean('paymentStatus');
-            $table->decimal('totalPrice', $precision=6, $scale=2);
+            $table->decimal('totalPrice',10,2);
             $table->timestamps();
         });
     }

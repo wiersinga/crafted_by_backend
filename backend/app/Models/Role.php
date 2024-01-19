@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,10 @@ class Role extends Model
 
     protected $fillable = [
         'type'
+    ];
+
+    protected $casts = [
+        'type' => RoleEnum::class
     ];
 
     public static function booted()

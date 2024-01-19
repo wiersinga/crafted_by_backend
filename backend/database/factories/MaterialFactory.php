@@ -14,10 +14,16 @@ class MaterialFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+
     public function definition(): array
     {
+        //$materialsArray = ['bois','fer','verre','coton','papier','plastique','roche','céramique'];
+
         return [
-            'name' => fake()-> word()
+            'name' => fake()->word()
         ];
     }
+
+
 }

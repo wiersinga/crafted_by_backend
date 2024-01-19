@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price',$precision=6, $scale=2);
+            $table->decimal('price',10,2);
             $table->foreignUuid('material_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('category_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('artist_id')->constrained()->cascadeOnDelete();
