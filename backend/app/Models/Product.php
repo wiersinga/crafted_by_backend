@@ -17,12 +17,6 @@ class Product extends Model
     protected $keyType= 'string';
     public $incrementing = false;
 
-    public static function booted()
-    {
-        static::creating(function ($model){
-            $model->id = Str::uuid();
-        });
-    }
     public function product_item(): BelongsToMany
     {
         return $this->belongsToMany(Product_item::class);

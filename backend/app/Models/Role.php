@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 class Role extends Model
 {
     use HasFactory, HasUuids;
+
     protected $keyType= 'string';
     public $incrementing = false;
 
@@ -26,12 +27,6 @@ class Role extends Model
         'type' => RoleEnum::class
     ];
 
-    public static function booted()
-    {
-        static::creating(function ($model){
-            $model->id = Str::uuid();
-        });
-    }
 
     public function users(): BelongsToMany
     {

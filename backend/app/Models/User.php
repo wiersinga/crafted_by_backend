@@ -48,7 +48,6 @@ class User extends Model
         'lastName',
         'birthdate',
         'email',
-        'password',
     ];
     protected $keyType= 'string';
     public $incrementing = false;

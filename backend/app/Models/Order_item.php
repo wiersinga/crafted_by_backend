@@ -16,12 +16,6 @@ class Order_item extends Model
     protected $keyType= 'string';
     public $incrementing = false;
 
-    public static function booted()
-    {
-        static::creating(function ($model){
-            $model->id = Str::uuid();
-        });
-    }
 
     protected $fillable = [
 
