@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         // RoleFactory
 
-       // Role::factory(3)->create();
+        //Role::factory(3)->create();
 
         // CategoryFactory
 
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
 
         // SizeFactory
 
-        //Size::factory(10)->create();
+      //  Size::factory(5)->create();
 
         // MaterialFactory
 
@@ -61,13 +61,13 @@ class DatabaseSeeder extends Seeder
 
         // UserFactory
 
-       // User::factory(10)->create();
+      //  User::factory(10)->create();
 
         // User::factory(10)->hasAttached(Address::inRandomOrder()->first()->id,Role::inRandomOrder()->first()->id)->create();
 
         // ProductFactory
 
-        //Product::factory(10)->create();
+       // Product::factory(10)->create();
 
         // ProductFactory
 
@@ -75,12 +75,12 @@ class DatabaseSeeder extends Seeder
 
         // ReviewFactory
 
-        //Review::factory(10)->create();
+      //  Review::factory(10)->create();
 
         // Product_itemFactory
-        //Product_item::factory(10)->create();
+       //Product_item::factory(3)->create();
 
-        Order_item::factory(10)->create();
+        //Order_item::factory(10)->create();
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -30,10 +31,10 @@ Route::post('/address/post', [AddressController::class, 'storeAddress']);
 Route::put('/address/update/{id}',[AddressController::class, 'updateAddress']);
 Route::delete('/address/delete/{id}', [AddressController::class, 'deleteAddress']);
 
-// CRUD Category
+// CRUD Artist
 
-Route::get('/categories', [CategoryController::class, 'getCategories']);
-Route::get('/category/{id}',[CategoryController::class, 'getCategory']);
-Route::post('/category/post', [CategoryController::class, 'storeCategory']);
-Route::put('/category/update/{id}',[CategoryController::class, 'updateCategory']);
-Route::delete('/category/delete/{id}', [CategoryController::class, 'deleteCategory']);
+Route::get('/artists', [ArtistController::class, 'getArtists']);
+Route::get('/artist/{id}',[ArtistController::class, 'getArtist']);
+Route::post('/artist/post', [ArtistController::class, 'storeArtist']);
+Route::put('/artist/update/{id}',[ArtistController::class, 'updateArtist']);
+Route::delete('/artist/delete/{id}', [ArtistController::class, 'deleteArtist']);
