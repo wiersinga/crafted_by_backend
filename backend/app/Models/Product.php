@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
+/**
+ * @method static create(array $all)
+ */
 class Product extends Model
 {
     use HasFactory, HasUuids;

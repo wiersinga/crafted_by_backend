@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price',10,2);
-            $table->foreignUuid('material_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('category_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('artist_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('material_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('category_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('artist_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
