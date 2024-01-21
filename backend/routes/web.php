@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ArtistController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +38,11 @@ Route::get('/artist/{id}',[ArtistController::class, 'getArtist']);
 Route::post('/artist/post', [ArtistController::class, 'storeArtist']);
 Route::put('/artist/update/{id}',[ArtistController::class, 'updateArtist']);
 Route::delete('/artist/delete/{id}', [ArtistController::class, 'deleteArtist']);
+
+// CRUD Order
+
+Route::get('/orders', [OrderController::class, 'getOrders']);
+Route::get('/order/{id}',[OrderController::class, 'getOrder']);
+Route::post('/order/post', [OrderController::class, 'storeOrder']);
+Route::put('/order/update/{id}',[OrderController::class, 'updateOrder']);
+Route::delete('/order/delete/{id}', [OrderController::class, 'deleteOrder']);
