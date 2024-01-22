@@ -21,8 +21,6 @@ class ReviewFactory extends Factory
         return [
             'rating' => fake()->numberBetween(0,5),
             'comment'=> fake()->text(300),
-            'user_id'=> User::all()->random()->id,
-            'product_id'=>Product::all()->random()->id,
         ];
     }
 }

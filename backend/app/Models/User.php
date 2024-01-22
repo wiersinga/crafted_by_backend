@@ -65,12 +65,13 @@ class User extends Model
         return $this->belongsTo(Role::class);
     }
 
+
+
     public function artists(): HasMany
     {
         return $this->hasMany(Artist::class);
 
     }
-
     public function review(): HasMany
     {
         return $this->hasMany(Review::class);

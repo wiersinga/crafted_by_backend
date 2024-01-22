@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-Size::factory(5)->create();
+
     }
 }
