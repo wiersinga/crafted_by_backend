@@ -25,7 +25,7 @@ class ReviewController extends Controller
     public function storeReview(Request $request)
     {
         $request->validate([
-            'rating' =>'required|numeric',
+            'rating' =>'required|integer',
             'comment' => 'string',
             'user_id' => 'required|exists:App\Models\User,id',
             'product_id' => 'required|exists:App\Models\Product,id',
