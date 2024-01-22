@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
@@ -20,21 +22,21 @@ class Product_item extends Model
 
     ];
 
-    public function color(): HasOne
+    public function color(): BelongsTo
     {
-        return $this->hasOne(Color::class);
+        return $this->belongsTo(Color::class);
     }
-    public function size(): HasOne
+    public function size(): BelongsTo
     {
-        return $this->hasOne(Size::class);
+        return $this->belongsTo(Size::class);
     }
-    public function product(): HasOne
+    public function product(): BelongsTo
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
-    public function order_item(): BelongsToMany
+    public function order_items(): HasMany
     {
-        return $this->belongsToMany(Order_item::class);
+        return $this->hasMany(Order_item::class);
     }
 }

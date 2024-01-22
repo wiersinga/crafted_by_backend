@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Size extends Model
@@ -20,8 +22,8 @@ class Size extends Model
         'name'
     ];
 
-    public function product_item(): BelongsToMany
+    public function product_items(): HasMany
     {
-        return $this->belongsToMany(Product_item::class);
+        return $this->hasMany(Product_item::class);
     }
 }

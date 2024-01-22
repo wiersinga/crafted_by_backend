@@ -15,15 +15,8 @@ use Illuminate\Support\Str;
 class Address extends Model
 {
     use HasFactory, HasUuids;
-    protected $keyType= 'string';
-    public $incrementing = false;
 
-//    public static function booted()
-//    {
-//        static::creating(function ($model){
-//            $model->id = Str::uuid();
-//        });
-//    }
+
     protected $fillable = [
         'street',
         'ZIPCode',
@@ -31,8 +24,8 @@ class Address extends Model
         'countryCode'
     ];
 
-    public function users(): BelongsToMany
+    public function users(): HasMany
     {
-        return $this->BelongsToMany(User::class);
+        return $this->hasMany(User::class);
     }
 }

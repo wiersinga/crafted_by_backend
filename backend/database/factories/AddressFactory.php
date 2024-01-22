@@ -17,7 +17,6 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->uuid(),
             'street' => fake()->streetAddress(),
             'ZIPCode' => fake()->postcode(),
             'city'=> fake()->city(),

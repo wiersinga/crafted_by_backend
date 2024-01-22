@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
@@ -20,10 +21,7 @@ class Product extends Model
     protected $keyType= 'string';
     public $incrementing = false;
 
-    public function product_item(): BelongsToMany
-    {
-        return $this->belongsToMany(Product_item::class);
-    }
+
 
     protected $fillable = [
         'name',
@@ -31,22 +29,27 @@ class Product extends Model
         'price',
     ];
 
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function materials(): BelongsToMany
+    {
+        return $this->belongsToMany(Material::class);
+    }
+    public function artist(): BelongsTo
+    {
+        return $this->belongsTo(Artist::class);
+    }
 
-    public function material(): HasOne
-    {
-        return $this->hasOne(Material::class);
-    }
-    public function artist(): HasOne
-    {
-        return $this->hasOne(Artist::class);
-    }
-    public function category(): HasOne
-    {
-        return $this->hasOne(Category::class);
-    }
 
-    public function review(): BelongsToMany
+
+    public function review(): HasMany
     {
-        return $this->belongsToMany(Review::class);
+        return $this->hasMany(Review::class);
+    }
+    public function product_items(): HasMany
+    {
+        return $this->hasMany(Product_item::class);
     }
 }

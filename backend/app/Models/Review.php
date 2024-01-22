@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
@@ -21,13 +22,13 @@ class Review extends Model
         'rating',
         'comment',
     ];
-    public function user(): HasMany
+    public function users(): BelongsTo
    {
-    return $this->hasMany(User::class);
+    return $this->belongsTo(User::class);
    }
 
-    public function product(): HasOne
+    public function products(): BelongsTo
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

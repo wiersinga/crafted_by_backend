@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Theme extends Model
@@ -15,20 +16,15 @@ class Theme extends Model
     protected $keyType= 'string';
     public $incrementing = false;
 
-    public static function booted()
-    {
-        static::creating(function ($model){
-            $model->id = Str::uuid();
-        });
-    }
+
 
     protected $fillable = [
         'name'
     ];
 
-    public function artist(): BelongsToMany
+    public function artists(): HasMany
     {
-        return $this->belongsToMany(Artist::class);
+        return $this->hasMany(Artist::class);
 
     }
 }

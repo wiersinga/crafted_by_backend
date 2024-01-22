@@ -23,9 +23,9 @@ class ArtistFactory extends Factory
             'siret'=> fake()->bothify('??######'),
             'history'=>fake()->text(300),
             'craftingDescription'=>fake()->text(300),
-            'speciality_id'=> Speciality::factory(),
-            'user_id'=> User::factory(),
-            'theme_id' =>Theme::factory(),
+//            'speciality_id'=> Speciality::factory(),
+//            'user_id'=> User::factory(),
+//            'theme_id' =>Theme::factory(),
         ];
     }
 }

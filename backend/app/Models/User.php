@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -52,32 +53,27 @@ class User extends Model
     protected $keyType= 'string';
     public $incrementing = false;
 
-    public static function booted()
+
+
+    public function addresses(): BelongsTo
     {
-        static::creating(function ($model){
-            $model->id = Str::uuid();
-        });
+        return $this->belongsTo(Address::class);
     }
 
-    public function address(): HasOne
+    public function roles(): BelongsTo
     {
-        return $this->hasOne(Address::class);
+        return $this->belongsTo(Role::class);
     }
 
-    public function role(): HasOne
+    public function artists(): HasMany
     {
-        return $this->hasOne(Role::class);
-    }
-
-    public function artists(): BelongsToMany
-    {
-        return $this->belongsToMany(Artist::class);
+        return $this->hasMany(Artist::class);
 
     }
 
-    public function review(): BelongsTo
+    public function review(): HasMany
     {
-        return $this->belongsTo(Review::class);
+        return $this->hasMany(Review::class);
     }
 }
 
