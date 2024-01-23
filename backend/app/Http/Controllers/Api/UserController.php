@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -9,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        return UserResource::collection(User::all());
     }
 
     public function store(Request $request)
@@ -17,14 +19,15 @@ class UserController extends Controller
         User::create($request->all());
     }
 
-    public function show(User $user)
+    public function show($id)
     {
-        return $user;
+        return new UserResource(User::findOrfail($id));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
+        return new UserResource($user);
     }
 
     public function destroy(User $user)
@@ -55,13 +58,7 @@ class UserController extends Controller
 //    public function storeUser(Request $request)
 //    {
 //        $request->validate([
-//            'firstName' =>'required|string',
-//            'lastName' => 'required|string',
-//            'birthdate' => 'required|date',
-//            'email' => 'required|email:rfc,dns|unique:users',
-//            'password' => 'required',
-//            'address_id' => 'required|exists:App\Models\Address,id',
-//            'role_id' => 'required|exists:App\Models\Role,id',
+//
 //        ]);
 //
 //        User::create($request->all());
@@ -72,13 +69,7 @@ class UserController extends Controller
 //    public function updateUser(Request $request, $id)
 //    {
 //        $request->validate([
-//            'firstName' =>'sometimes|required|string',
-//            'lastName' => 'sometimes|required|string',
-//            'birthdate' => 'sometimes|required|date',
-//            'email' => 'sometimes|required|email:rfc,dns',
-//            'password' => 'sometimes|required|string',
-//            'address_id' => 'exists:App\Models\Address,id',
-//            'role_id' => 'exists:App\Models\Role,id',
+
 //        ]);
 //
 //        $user = User::find($id);

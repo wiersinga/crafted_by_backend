@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class UpdateArtistRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,12 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstName' =>'required|string',
-            'lastName' => 'required|string',
-            'birthdate' => 'required|date',
-            'email' => 'required|email:rfc,dns|unique:users',
-            'password' => 'required',
-            'address_id' => 'required|exists:App\Models\Address,id',
-            'role_id' => 'required|exists:App\Models\Role,id',
+            'siret' =>'sometimes|required|string',
+            'history' => 'sometimes|required|string',
+            'craftingDescription' => 'sometimes|required|string',
+            'speciality_id'=> 'sometimes|required|exists:App\Models\Speciality,id',
+            'user_id'=> 'sometimes|required|exists:App\Models\User,id',
+            'theme_id'=> 'sometimes|exists:App\Models\Theme,id',
         ];
     }
 }
