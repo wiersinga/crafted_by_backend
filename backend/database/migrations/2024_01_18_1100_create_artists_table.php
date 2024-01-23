@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('siret');
             $table->text('history');
             $table->text('craftingDescription');
-            $table->foreignUuid('speciality_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('theme_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('speciality_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('theme_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

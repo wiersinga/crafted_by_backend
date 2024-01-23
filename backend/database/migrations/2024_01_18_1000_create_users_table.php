@@ -20,8 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignUuid('address_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('role_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('address_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('role_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -14,13 +14,12 @@ class AddressResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         return [
-            'id'=> $this->id,
-            'street'=> $this->street,
-            'ZIPCode'=> $this->ZIPCode,
-            'city'=> $this->city,
-            'countryCode'=> $this->countryCode
+            'id'=> $this->resource->id,
+            'street'=> $this->resource->street,
+            'ZIPCode'=> $this->resource->ZIPCode,
+            'city'=> $this->resource->city,
+            'countryCode'=> $this->resource->countryCode
         ];
     }
 }

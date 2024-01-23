@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('product_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('size_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('color_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('product_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('size_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('color_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

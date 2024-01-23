@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreArtistRequest;
+use App\Http\Requests\UpdateArtistRequest;
+use App\Http\Resources\ArtistResource;
 use App\Models\Artist;
 use Illuminate\Http\Request;
 
@@ -10,51 +13,29 @@ class ArtistController extends Controller
 
     public function index()
     {
-       // return Artist::with('speciality','user','theme')->get();
+        return ArtistResource::collection(Artist::all());
     }
 
-    public function store(Request $request)
+    public function store(StoreArtistRequest $request)
     {
-        Artist::create($request->all());
+        $artist = Artist::create($request->all());
+        return new ArtistResource($artist);
     }
 
-    public function show(Artist $artist)
+    public function show($id)
     {
-        return $artist;
+        return new ArtistResource(Artist::findOrFail($id));
     }
 
-    public function update(Request $request, Artist $artist)
+    public function update(UpdateArtistRequest $request, Artist $artist)
     {
         $artist->update($request->all());
+        return new ArtistResource($artist);
     }
 
     public function destroy(Artist $artist)
     {
         $artist->delete();
     }
-
-
-
-//        $request->validate([
-//            'siret' =>'required|string',
-//            'history' => 'required|string',
-//            'craftingDescription' => 'required|string',
-//            'speciality_id'=> 'required|exists:App\Models\Speciality,id',
-//            'user_id'=> 'required|exists:App\Models\User,id',
-//            'theme_id'=> 'exists:App\Models\Theme,id',
-//        ]);
-//
-//
-//
-//
-//        $request->validate([
-//            'siret' =>'sometimes|required|string',
-//            'history' => 'sometimes|required|string',
-//            'craftingDescription' => 'sometimes|required|string',
-//            'speciality_id'=> 'sometimes|required|exists:App\Models\Speciality,id',
-//            'user_id'=> 'sometimes|required|exists:App\Models\User,id',
-//            'theme_id'=> 'sometimes|exists:App\Models\Theme,id',
-//        ]);
-
 
 }

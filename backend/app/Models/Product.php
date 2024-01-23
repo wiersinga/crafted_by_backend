@@ -18,11 +18,6 @@ class Product extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $keyType= 'string';
-    public $incrementing = false;
-
-
-
     protected $fillable = [
         'name',
         'description',
@@ -44,7 +39,7 @@ class Product extends Model
         return $this->belongsToMany(Material::class);
     }
 
-    public function review(): HasMany
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }

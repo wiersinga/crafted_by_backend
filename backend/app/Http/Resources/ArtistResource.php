@@ -16,15 +16,13 @@ class ArtistResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=> $this->id,
-            'siret'=> $this->siret,
-            'history'=> $this->history,
-            'craftingDescription'=> $this->craftingDescription,
-            'speciality'=> SpecialityResource::collection($this->speciality),
-            'user'=> UserResource::collection($this->user),
-            'theme'=> ThemeResource::collection($this->theme),
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'id'=> $this->resource->id,
+            'siret'=> $this->resource->siret,
+            'history'=> $this->resource->history,
+            'craftingDescription'=> $this->resource->craftingDescription,
+            'speciality'=> new SpecialityResource($this->resource->speciality),
+            'user'=> new UserResource($this->resource->user),
+            'theme'=> new ThemeResource($this->resource->theme),
         ];
 
     }

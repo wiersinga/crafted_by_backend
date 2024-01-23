@@ -52,9 +52,6 @@ class User extends Model
         'role_id',
         'address_id'
     ];
-    protected $keyType= 'string';
-    public $incrementing = false;
-
 
 
     public function address(): BelongsTo
@@ -74,7 +71,7 @@ class User extends Model
         return $this->hasMany(Artist::class);
 
     }
-    public function review(): HasMany
+    public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
