@@ -19,8 +19,8 @@ class Order_itemFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_id'=> Order::factory()->create(),
-            'product_item_id'=> Product_item::factory()->create(),
+            'order_id'=> Order::all()->random()->id,
+            'product_item_id'=> Product_item::all()->random()->id,
         ];
     }
 }

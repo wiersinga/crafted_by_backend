@@ -10,7 +10,7 @@ class ArtistController extends Controller
 
     public function index()
     {
-        return Artist::with('speciality','user','theme')->get();
+       // return Artist::with('speciality','user','theme')->get();
     }
 
     public function store(Request $request)

@@ -23,9 +23,8 @@ class ProductFactory extends Factory
            'name' => fake()->word,
             'description' =>fake()->text(200),
             'price'=> fake()->randomFloat(2,0,1000),
-            'material_id'=> Material::factory(),
-            'category_id'=> Category::factory(),
-            'artist_id'=> Artist::factory(),
+            'category_id'=> Category::all()->random(1)->value('id'),
+            'artist_id'=> Artist::all()->random(1)->value('id'),
         ];
     }
 }

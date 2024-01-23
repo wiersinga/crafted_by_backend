@@ -49,18 +49,20 @@ class User extends Model
         'lastName',
         'birthdate',
         'email',
+        'role_id',
+        'address_id'
     ];
     protected $keyType= 'string';
     public $incrementing = false;
 
 
 
-    public function addresses(): BelongsTo
+    public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }
 
-    public function roles(): BelongsTo
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
