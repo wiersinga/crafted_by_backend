@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ArtistController;
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,5 @@ Route::apiResource('users',UserController::class);
 Route::apiResource('addresses',AddressController::class);
 
 Route::apiResource('artists',ArtistController::class);
+
+Route::apiResource('products',ProductController::class);
