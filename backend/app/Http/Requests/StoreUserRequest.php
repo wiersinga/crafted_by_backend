@@ -31,4 +31,20 @@ class StoreUserRequest extends FormRequest
             'role_id' => 'required|exists:App\Models\Role,id',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'firstName.required' => 'The Name is required',
+            'lastName.required' => 'The Name is required',
+            'birthdate.required' => 'The birthdate is required',
+            'email.required' => 'An Email address is required',
+            'email.rfc'=> 'Check the Email',
+            'email.dns'=>'Check the Email',
+            'password.required' => 'Password is required',
+            'password.min(8)'=>'Password must have at least 12 characters',
+            'password.mixedCase'=> 'Password must have at least on uppercase and one lowercase',
+            'password.confirmed'=> 'Passwords are not identical'
+        ];
+    }
 }

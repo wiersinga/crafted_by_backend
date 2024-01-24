@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {
@@ -14,9 +15,11 @@ class UserController extends Controller
         return UserResource::collection(User::all());
     }
 
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        User::create($request->all());
+        $user =User::create($request->validated());
+
+        return new UserResource($user);
     }
 
     public function show($id)

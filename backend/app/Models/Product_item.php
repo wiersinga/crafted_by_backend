@@ -19,7 +19,7 @@ class Product_item extends Model
     public $incrementing = false;
 
     protected $fillable = [
-
+        'product_item', 'size_id', 'color_id'
     ];
 
     public function color(): BelongsTo

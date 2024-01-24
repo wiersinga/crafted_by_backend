@@ -30,4 +30,15 @@ class UpdateProductRequest extends FormRequest
             'artist_id'=> 'sometimes|required|exists:App\Models\Artist,id',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The Name is required',
+            'price.required' => 'The price is required',
+            'material.required' => 'Material(s) is/are required',
+            'category.required'=> 'Category is required',
+            'artist.required'=>'Artist is required',
+        ];
+    }
 }

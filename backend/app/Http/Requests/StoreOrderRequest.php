@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreArtistRequest extends FormRequest
+class StoreOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,17 @@ class StoreArtistRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'siret' =>'required|string',
-            'history' => 'required|string',
-            'craftingDescription' => 'required|string',
-            'speciality_id'=> 'required|exists:App\Models\Speciality,id',
-            'user_id'=> 'required|exists:App\Models\User,id',
-            'theme_id'=> 'exists:App\Models\Theme,id',
+            'orderNum' =>'required|string',
+            'paymentStatus' =>'required|boolean',
+            'totalPrice' => 'required|decimal:2',
         ];
     }
-
     public function messages(): array
     {
         return [
-            'siret.required' => 'Siret is required',
-            'history.required' => 'The Name is required',
-            'craftingDescription.required' => 'The birthdate is required',
+            'orderNum.required' => 'OrderNum is required',
+            'paymentStatus.required' => 'The paymentStatus is required',
+            'totalPrice.required' => 'The birthdate is required',
         ];
     }
 }

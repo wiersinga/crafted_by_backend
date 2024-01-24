@@ -6,8 +6,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Material;
 use App\Models\Product;
-
+use Illuminate\Routing\Controller;
 
 
 class ProductController extends Controller
@@ -19,8 +20,11 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
-        return new ProductResource($product);
+            $product = Product::create($request->validated());
+            $material= Material::find($request->get('material_id'));
+            $product->materials()->attach($material);
+            return new ProductResource($product);
+
     }
 
     public function show($id)

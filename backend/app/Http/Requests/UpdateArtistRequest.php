@@ -30,4 +30,12 @@ class UpdateArtistRequest extends FormRequest
             'theme_id'=> 'sometimes|exists:App\Models\Theme,id',
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'siret.required' => 'Siret is required',
+            'history.required' => 'The Name is required',
+            'craftingDescription.required' => 'The birthdate is required',
+        ];
+    }
 }

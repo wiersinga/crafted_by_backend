@@ -13,6 +13,8 @@ class ArtistResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
+    public static $wrap = 'artist';
     public function toArray(Request $request): array
     {
         return [

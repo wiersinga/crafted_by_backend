@@ -24,7 +24,7 @@ class User extends Model
      */
 
 
-    /**
+    /**$2y$12$z0x8Ie/57tyY1rua5gRgr.rm3BtVIY…
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -69,7 +69,6 @@ class User extends Model
     public function artists(): HasMany
     {
         return $this->hasMany(Artist::class);
-
     }
     public function reviews(): HasMany
     {

@@ -2,67 +2,40 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Resources\ReviewResource;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ReviewController extends Controller
 {
-    public function getReviews()
+    public function index()
     {
-        return  Review::all();
+        return  ReviewResource::collection(Review::all());
     }
 
-    public function getReview($id){
+    public function show($id){
 
-        $review = Review::find($id);
-
-        if (!$review){
-            return response('Review not Found',404);
-        }
-        return $review;
+        return new ReviewResource(Review::findOrFail($id));
     }
 
-    public function storeReview(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        $request->validate([
-            'rating' =>'required|integer',
-            'comment' => 'string',
-            'user_id' => 'required|exists:App\Models\User,id',
-            'product_id' => 'required|exists:App\Models\Product,id',
-
-        ]);
-
-        Review::create($request->all());
-
-        return response('Review created successfully');
+       $review = Review::create($request->validated());
+        return new ReviewResource($review);
     }
 
-    public function updateReview(Request $request, $id)
+    public function update(Request $request, Review $review)
     {
-        $request->validate([
-            'rating' =>'sometimes|required|numeric',
-            'comment' => 'sometimes|string',
-            'user_id' => 'exists:App\Models\User,id',
-            'product_id' => 'exists:App\Models\Product,id',
-        ]);
-
-        $review = Review::find($id);
-
-        if (!$review){
-            return response('Review not Found',404);
-        }
-        $review->update($request->all());
-        return response('Review updated successfully');
+        $review->update($request->validated());
+        return new ReviewResource($review);
     }
 
-    public function deleteReview($id)
+    public function delete(Review $review)
     {
-        $review = Review::find($id);
+        $review->delete();
+        return ReviewResource::collection(Review::all());
 
-        if($review){
-            $review->delete();
-            return response('Review deleted successfully');
-        }
-        return response('Review not Found',404);
     }
 }

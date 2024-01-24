@@ -21,13 +21,15 @@ class Review extends Model
     protected $fillable = [
         'rating',
         'comment',
+        'user_id',
+        'product_id'
     ];
-    public function users(): BelongsTo
+    public function user(): BelongsTo
    {
     return $this->belongsTo(User::class);
    }
 
-    public function products(): BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

@@ -2,66 +2,40 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class OrderController extends Controller
 {
-    public function getOrders()
+    public function index()
     {
-        return  Order::all();
+        return  OrderResource::collection(Order::all());
     }
 
-    public function getOrder($id){
+    public function show($id){
 
-        $order = Order::find($id);
-
-        if (!$order){
-            return response('Order not Found',404);
-        }
-        return $order;
+        return new OrderResource(Order::findOrFail($id));
     }
 
-    public function storeOrder(Request $request)
+    public function store(StoreOrderRequest $request)
     {
-        $request->validate([
-            'orderNum' =>'required|string',
-            'paymentStatus' => 'required|boolean',
-            'totalPrice' => 'required|decimal:2',
-        ]);
-
-        Order::create($request->all());
-
-        return response('Order created successfully');
+        $order = Order::create($request->all());
+        return new OrderResource($order);
     }
 
-    public function updateOrder(Request $request, $id)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
-        $request->validate([
-            'orderNum' =>'required|string',
-            'paymentStatus' => 'required|boolean',
-            'totalPrice' => 'required|decimal:2',
-        ]);
-
-        $order = Order::find($id);
-
-        if (!$order){
-            return response('Order not Found',404);
-        }
         $order->update($request->all());
-        return response('Order updated successfully');
+        return new OrderResource($order);
+
     }
 
-    public function deleteOrder($id)
+    public function destroy(Order $order)
     {
-        $order = Order::find($id);
-
-        if($order){
-
-            $order->delete();
-            return response('Order deleted successfully');
-        }
-
-        return response('Order not Found',404);
+       $order->delete();
+       return  OrderResource::collection(Order::all());
     }
 }

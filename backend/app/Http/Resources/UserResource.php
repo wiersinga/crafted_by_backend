@@ -22,8 +22,8 @@ class UserResource extends JsonResource
             'lastName'=> $this->lastName,
             'email'=> $this->email,
             'password' =>$this->password, // fix the permission after
-            'address_id '=> new AddressResource($this->resource->address),
-            'role_id' => $this->resource->role,
+            'address'=> new AddressResource($this->resource->address),
+            'role' => new RoleResource($this->resource->role),
         ];
     }
 }

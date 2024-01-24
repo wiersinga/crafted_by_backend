@@ -16,7 +16,7 @@ class Order_item extends Model
 
 
     protected $fillable = [
-
+        'quantity', 'order_id', 'product_item_id'
     ];
 
     public function order(): BelongsTo
