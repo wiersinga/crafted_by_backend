@@ -24,8 +24,7 @@ class Product extends Model
         'price',
         'category_id',
         'artist_id',
-
-    ];
+        ];
 
     public function category(): BelongsTo
     {

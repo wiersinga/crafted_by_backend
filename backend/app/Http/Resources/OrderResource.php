@@ -21,6 +21,7 @@ class OrderResource extends JsonResource
             'orderNum'=>$this->resource->orderNum,
             'paymentStatus'=>$this->resource->paymentStatus,
             'totalPrice'=>$this->resource->totalPrice,
+
         ];
     }
 }
