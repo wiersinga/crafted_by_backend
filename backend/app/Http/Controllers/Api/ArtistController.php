@@ -20,6 +20,7 @@ class ArtistController extends Controller
     public function store(StoreArtistRequest $request)
     {
         $artist = Artist::create($request->validated());
+
         return new ArtistResource($artist);
     }
 

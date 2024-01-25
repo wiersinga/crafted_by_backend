@@ -24,9 +24,9 @@ class StoreUserRequest extends FormRequest
         return [
             'firstName' =>'required|string',
             'lastName' => 'required|string',
-            'birthdate' => 'required|date',
+            'birthdate' => 'date',
             'email' => 'required|email:rfc,dns|unique:users',
-            'password' => 'required',
+            'password' => 'required|string|Password::min(10)->mixedCase()',
             'address_id' => 'required|exists:App\Models\Address,id',
             'role_id' => 'required|exists:App\Models\Role,id',
         ];

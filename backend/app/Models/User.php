@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use App\Http\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends  Model
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
@@ -30,7 +28,7 @@ class User extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+
         'remember_token',
     ];
 
@@ -49,6 +47,7 @@ class User extends Model
         'lastName',
         'birthdate',
         'email',
+        'password',
         'role_id',
         'address_id'
     ];

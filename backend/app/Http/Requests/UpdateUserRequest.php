@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
             'lastName' => 'sometimes|required|string',
             'birthdate' => 'sometimes|required|date',
             'email' => 'sometimes|required|email:rfc,dns',
-            'password' => 'sometimes|required|string|Password::min(10)->mixedCase()|confirmed',
+            'password' => 'sometimes|required|string|Password::min(10)->mixedCase()',
             'address_id' => 'exists:App\Models\Address,id',
             'role_id' => 'exists:App\Models\Role,id',
         ];

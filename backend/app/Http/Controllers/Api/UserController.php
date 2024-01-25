@@ -3,21 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return UserResource::collection(User::all());
+//        User::create([
+//            'email'=> 'admin@admin.fr',
+//            'password'=> Hash::make('Password123'),
+//            'role_id'=> '9b2d49a3-054f-4607-beed-b661e35d9be5'
+//        ]);
+
+          return UserResource::collection(User::all());
     }
 
-    public function store(StoreOrderRequest $request)
+    public function store(StoreUserRequest $request)
     {
-        $user =User::create($request->validated());
+
+        $user = User::create($request->validated());
 
         return new UserResource($user);
     }

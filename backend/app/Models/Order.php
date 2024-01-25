@@ -19,6 +19,7 @@ class Order extends Model
         'orderNum',
         'paymentStatus',
         'totalPrice',
+        'order_items_id'
     ];
 
     public function order_items(): HasMany
