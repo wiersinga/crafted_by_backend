@@ -21,26 +21,62 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-// Users
-Route::apiResource('users',UserController::class);  // route //api/users/
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
-// Addresses
-Route::apiResource('addresses',AddressController::class);
-
-// Artists
-Route::apiResource('artists',ArtistController::class);
-
-// Products
-Route::apiResource('products',ProductController::class);
-
-Route::get('/products/{categoryName}', [ProductController::class, 'getProductsByCategory']);
+//// CRUD Product
+Route::get('/products/category/{categoryName}', [ProductController::class, 'getProductsByCategory']);
+Route::get('/products/search/{searchTerm}',[ProductController::class, 'getProductsBySearch']);
+Route::get('/products/material/{materialName}',[ProductController::class, 'getProductsByMaterial']);
+Route::get('/products/artist/{artistName}',[ProductController::class, 'getProductsByArtist']);
 
 
-// Order
-Route::apiResource('orders',OrderController::class);
 
-// Review
-Route::apiResource('reviews', ReviewController::class);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}',[ProductController::class, 'show']);
+Route::post('/products/post', [ProductController::class, 'store']);
+Route::put('/products/update/{id}',[ProductController::class, 'update']);
+Route::delete('/products/delete/{id}', [ProductController::class, 'delete']);
+//Route::apiResource('/products',ProductController::class);
+
+//// CRUD Address
+
+Route::get('/addresses', [AddressController::class, 'index']);
+Route::get('/addresses/{id}',[AddressController::class, 'show']);
+Route::post('/addresses/post', [AddressController::class, 'store']);
+Route::put('/addresses/update/{id}',[AddressController::class, 'update']);
+Route::delete('/addresses/delete/{id}', [AddressController::class, 'delete']);
+
+// CRUD Artist
+
+Route::get('/artists', [ArtistController::class, 'index']);
+Route::get('/artists/{id}',[ArtistController::class, 'show']);
+Route::post('/artists/post', [ArtistController::class, 'store']);
+Route::put('/artists/update/{id}',[ArtistController::class, 'update']);
+Route::delete('/artists/delete/{id}', [ArtistController::class, 'delete']);
+
+// CRUD Order
+
+Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/orders/{id}',[OrderController::class, 'show']);
+Route::post('/orders/post', [OrderController::class, 'store']);
+Route::put('/orders/update/{id}',[OrderController::class, 'update']);
+Route::delete('/orders/delete/{id}', [OrderController::class, 'delete']);
+
+// CRUD Review
+
+Route::get('/reviews', [ReviewController::class, 'index']);
+Route::get('/reviews/{id}',[ReviewController::class, 'show']);
+Route::post('/reviews/post', [ReviewController::class, 'store']);
+Route::put('/reviews/update/{id}',[ReviewController::class, 'update']);
+Route::delete('/reviews/delete/{id}', [ReviewController::class, 'delete']);
+
+//// CRUD User
+
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}',[UserController::class, 'show']);
+Route::post('/users/post', [UserController::class, 'store']);
+Route::put('/users/update/{id}',[UserController::class, 'update']);
+Route::delete('/users/delete/{id}', [UserController::class, 'delete']);
+
