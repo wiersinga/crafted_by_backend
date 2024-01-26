@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateArtistRequest;
 use App\Http\Resources\ArtistResource;
 use App\Models\Artist;
 
+
 use Illuminate\Routing\Controller;
+
 
 class ArtistController extends Controller
 {
@@ -20,9 +22,9 @@ class ArtistController extends Controller
     public function store(StoreArtistRequest $request)
     {
         $artist = Artist::create($request->validated());
-
         return new ArtistResource($artist);
     }
+
 
     public function show($id)
     {
