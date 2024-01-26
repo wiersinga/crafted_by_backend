@@ -10,6 +10,7 @@ use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -37,6 +38,7 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, product $product)
     {
+        dd(Auth::user()->can('update'));
         $product->update($request->all());
         return new ProductResource($product);
     }
