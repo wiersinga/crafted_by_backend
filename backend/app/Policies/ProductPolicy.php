@@ -37,7 +37,7 @@ class ProductPolicy
     }
     public function create(User $user, Product $product ): bool
     {
-      return ($user->role_id === '9b2f102b-decc-4cf2-8d89-d1445a59d75b' || $user->id === $product->artist_id);
+      return $user->role_id === '9b2f102b-decc-4cf2-8d89-d1445a59d75b' || $user->id === $product->artist_id;
     }
 
     /**

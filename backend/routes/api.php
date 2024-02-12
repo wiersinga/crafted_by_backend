@@ -37,9 +37,6 @@ Route::get('/products/category/{categoryName}', [ProductController::class, 'getP
 Route::get('/products/search/{searchTerm}',[ProductController::class, 'getProductsBySearch']);
 Route::get('/products/material/{materialName}',[ProductController::class, 'getProductsByMaterial']);
 Route::get('/products/artist/{artistName}',[ProductController::class, 'getProductsByArtist']);
-
-
-
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}',[ProductController::class, 'show']);
 Route::post('/products/post', [ProductController::class, 'store']);
@@ -49,19 +46,19 @@ Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
 
 //// CRUD Address
 
-Route::middleware('auth:sanctum')->get('/addresses', [AddressController::class, 'index']);
-Route::middleware('auth:sanctum')->get('/addresses/{id}',[AddressController::class, 'show']);
-Route::middleware('auth:sanctum')->post('/addresses/post', [AddressController::class, 'store']);
-Route::middleware('auth:sanctum')->put('/addresses/update/{id}',[AddressController::class, 'update']);
-Route::middleware('auth:sanctum')->delete('/addresses/delete/{id}', [AddressController::class, 'destroy']);
+Route::get('/addresses', [AddressController::class, 'index']);
+Route::get('/addresses/{id}',[AddressController::class, 'show']);
+Route::post('/addresses/post', [AddressController::class, 'store']);
+Route::put('/addresses/update/{id}',[AddressController::class, 'update']);
+Route::delete('/addresses/delete/{id}', [AddressController::class, 'destroy']);
 
 // CRUD Artist
 
-Route::middleware('auth:sanctum')->get('/artists', [ArtistController::class, 'index']);
-Route::middleware('auth:sanctum')->get('/artists/{id}',[ArtistController::class, 'show']);
-Route::middleware('auth:sanctum')->post('/artists/post', [ArtistController::class, 'store']);
-Route::middleware('auth:sanctum')->put('/artists/update/{id}',[ArtistController::class, 'update']);
-Route::middleware('auth:sanctum')->delete('/artists/delete/{id}', [ArtistController::class, 'destroy']);
+Route::get('/artists', [ArtistController::class, 'index']);
+Route::get('/artists/{id}',[ArtistController::class, 'show']);
+Route::post('/artists/post', [ArtistController::class, 'store']);
+Route::put('/artists/update/{id}',[ArtistController::class, 'update']);
+Route::delete('/artists/delete/{id}', [ArtistController::class, 'destroy']);
 
 // CRUD Order
 
