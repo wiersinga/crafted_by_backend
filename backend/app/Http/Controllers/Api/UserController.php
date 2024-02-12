@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreOrderRequest;
+
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {

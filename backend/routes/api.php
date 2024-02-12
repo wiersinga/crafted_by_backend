@@ -45,23 +45,23 @@ Route::get('/products/{id}',[ProductController::class, 'show']);
 Route::post('/products/post', [ProductController::class, 'store']);
 Route::put('/products/update/{id}',[ProductController::class, 'update']);
 Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
-Route::apiResource('/products',ProductController::class);
+//Route::apiResource('/products',ProductController::class);
 
 //// CRUD Address
 
-Route::get('/addresses', [AddressController::class, 'index']);
-Route::get('/addresses/{id}',[AddressController::class, 'show']);
-Route::post('/addresses/post', [AddressController::class, 'store']);
-Route::put('/addresses/update/{id}',[AddressController::class, 'update']);
-Route::delete('/addresses/delete/{id}', [AddressController::class, 'destroy']);
+Route::middleware('auth:sanctum')->get('/addresses', [AddressController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/addresses/{id}',[AddressController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/addresses/post', [AddressController::class, 'store']);
+Route::middleware('auth:sanctum')->put('/addresses/update/{id}',[AddressController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/addresses/delete/{id}', [AddressController::class, 'destroy']);
 
 // CRUD Artist
 
-Route::get('/artists', [ArtistController::class, 'index']);
-Route::get('/artists/{id}',[ArtistController::class, 'show']);
-Route::post('/artists/post', [ArtistController::class, 'store']);
-Route::put('/artists/update/{id}',[ArtistController::class, 'update']);
-Route::delete('/artists/delete/{id}', [ArtistController::class, 'destroy']);
+Route::middleware('auth:sanctum')->get('/artists', [ArtistController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/artists/{id}',[ArtistController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/artists/post', [ArtistController::class, 'store']);
+Route::middleware('auth:sanctum')->put('/artists/update/{id}',[ArtistController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/artists/delete/{id}', [ArtistController::class, 'destroy']);
 
 // CRUD Order
 
@@ -81,9 +81,9 @@ Route::delete('/reviews/delete/{id}', [ReviewController::class, 'destroy']);
 
 //// CRUD User
 
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{id}',[UserController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/users/{id}',[UserController::class, 'show']);
 //Route::post('/users/post', [UserController::class, 'store']);
-Route::put('/users/update/{id}',[UserController::class, 'update']);
-Route::delete('/users/delete/{id}', [UserController::class, 'destroy']);
+Route::middleware('auth:sanctum')->put('/users/update/{id}',[UserController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/users/delete/{id}', [UserController::class, 'destroy']);
 

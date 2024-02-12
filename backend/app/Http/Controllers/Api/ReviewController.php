@@ -28,6 +28,7 @@ class ReviewController extends Controller
 
     public function update(Request $request, Review $review)
     {
+
         $review->update($request->validated());
         return new ReviewResource($review);
     }
