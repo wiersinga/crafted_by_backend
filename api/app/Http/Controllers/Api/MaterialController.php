@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class MaterialController extends Controller
+{
+    public function index()
+    {
+        return DB::table('materials')->get();
+    }
+}
