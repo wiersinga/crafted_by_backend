@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Routing\Controller;
 
 
 class UserController extends Controller
@@ -19,16 +19,9 @@ class UserController extends Controller
 //            'password'=> Hash::make('Password123'),
 //            'role_id'=> '9b2d49a3-054f-4607-beed-b661e35d9be5'
 //        ]);
+        $this->authorize('view',User::class);
 
           return UserResource::collection(User::all());
-    }
-
-    public function store(StoreUserRequest $request)
-    {
-
-        $user = User::create($request->validated());
-
-        return new UserResource($user);
     }
 
     public function show($id)
@@ -36,15 +29,36 @@ class UserController extends Controller
         return new UserResource(User::findOrfail($id));
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function store(StoreUserRequest $request)
     {
+        $this->authorize('create',User::class);
+
+        $user = User::create($request->validated());
+
+        return new UserResource($user);
+    }
+
+
+
+    public function update(UpdateUserRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $this->authorize('create',User::class);
+
         $user->update($request->all());
         return new UserResource($user);
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::findOrFail($id);
+
+        $this->authorize('create',User::class);
+
         $user->delete();
+
+        return response('User deleted successfully');
     }
 
 }

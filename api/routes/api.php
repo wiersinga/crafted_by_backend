@@ -46,6 +46,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/create', [ProductController::class, 'create']);
     Route::put('/products/update/{id}',[ProductController::class, 'update']);
     Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
+    Route::post('/users/post', [UserController::class, 'store']);
+
 
 });
 Route::get('/phpinfo', function () {

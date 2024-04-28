@@ -26,10 +26,26 @@ class StoreUserRequest extends FormRequest
             'lastName' => 'required|string',
             'birthdate' => 'date',
             'email' => 'required|email:rfc,dns|unique:users',
-            'password' => 'required|string|Password::min(10)->mixedCase()',
-            'address_id' => 'required|exists:App\Models\Address,id',
-            'role_id' => 'required|exists:App\Models\Role,id',
+            'password' => 'required|string|Password::min:10->mixedCase()',
+            'address.street' => 'sometimes|required|string', // Street is required only if address is provided
+            'address.zipcode' => 'sometimes|required|string', // Zipcode is required only if address is provided
+            'address.city' => 'sometimes|required|string', // City is required only if address is provided
+            'address.country' => 'sometimes|required|string', // Country is required only if address is provided
+            'role.type' => 'required|exists:App\Models\Role,type',
         ];
+//        return [
+//            'firstName' =>'required|string',
+//            'lastName' => 'required|string',
+//            'birthdate' => 'date',
+//            'email' => 'required|email:rfc,dns|unique:users',
+//            'password' => 'required|string|Password::min(10)->mixedCase()',
+////            'address_id' => 'required|exists:App\Models\Address,id',
+//            'address.street' => 'required|string',
+//            'address.zipcode' => 'required|string',
+//            'address.city' => 'required|string',
+//            'address.country' => 'required|string',
+//            'role.type' => 'required|exists:App\Models\Role,id',
+//        ];
     }
 
     public function messages(): array
@@ -42,9 +58,9 @@ class StoreUserRequest extends FormRequest
             'email.rfc'=> 'Check the Email',
             'email.dns'=>'Check the Email',
             'password.required' => 'Password is required',
-            'password.min(8)'=>'Password must have at least 12 characters',
+            'password.min(10)'=>'Password must have at least 10 characters',
             'password.mixedCase'=> 'Password must have at least on uppercase and one lowercase',
-            'password.confirmed'=> 'Passwords are not identical'
+//            'password.confirmed'=> 'Passwords are not identical'
         ];
     }
 }
