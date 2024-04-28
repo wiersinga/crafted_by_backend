@@ -41,7 +41,7 @@
         "/api/products/create": {
             "post": {
                 "tags": [
-                    "Product"
+                    "Products"
                 ],
                 "summary": "Create a new Product",
                 "operationId": "1b55d35de914dc6a5755c548182f4fce",

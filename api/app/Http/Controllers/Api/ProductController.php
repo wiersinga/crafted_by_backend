@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-//use Illuminate\Routing\Controller;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
-use App\Models\Artist;
 use App\Models\Material;
 use App\Models\Product;
-//use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -23,8 +19,8 @@ use OpenApi\Attributes as OA;
 #[
     OA\Info(version: "1.0.0", description: "CraftedBy api", title: "CraftedBy-api Documentation"),
     OA\Server(url: 'http://localhost:8000', description: "local server"),
-    OA\Server(url: 'http://staging.example.com', description: "staging server"),
-    OA\Server(url: 'http://example.com', description: "production server"),
+//    OA\Server(url: 'http://staging.example.com', description: "staging server"),
+//    OA\Server(url: 'http://example.com', description: "production server"),
     OA\SecurityScheme( securityScheme: 'bearerAuth', type: "http", name: "Authorization", in: "header", scheme: "bearer"),
 ]
 
@@ -78,10 +74,6 @@ class ProductController extends Controller
     )]
     public function create(StoreProductRequest $request)
     {
-        $user = auth()->user();
-        if (!$user) {
-            dd('User not authenticated.');
-        }
         $this->authorize('create', Product::class);
 
             $product = Product::create($request->validated());
@@ -90,23 +82,17 @@ class ProductController extends Controller
             return new ProductResource($product);
     }
 
-    public function update(UpdateProductRequest $request, product $product)
+    public function update(UpdateProductRequest $request, product $product, $id)
     {
-        //$this->authorize('update', Product::class);
+
+        $product = Product::findOrFail($id);
+
+        $this->authorize('update', $product);
 
         $product->update($request->all());
 
         return new ProductResource($product);
     }
-//        $user = auth()->user();
-//        if (!$user) {
-//            dd('User not authenticated.');
-//        }
-//        $user = auth()->user();
-////        \Log::info("User Role: " . $user->role->type); // Log user role
-//        if (Gate::denies('update', Product::class)) {
-//            dd('User not authorized to update product.');
-//        }
 
 
 //    public function store(StoreProductRequest $request)
@@ -134,12 +120,14 @@ class ProductController extends Controller
 
 
 
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::findOrFail($id);
+
         $this->authorize('delete', $product);
 
         $product->delete();
-        return ('deleted');
+        return ('The product is deleted !');
     }
 
     public function getProductsRandom(){

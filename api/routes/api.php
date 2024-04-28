@@ -4,10 +4,13 @@
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\ArtistController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CodeCheckController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\LoginRegisterController;
 use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ResetPasswordController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,11 +36,18 @@ Route::post('/login', [LoginRegisterController::class, 'login']);
 
 // logout
 Route::middleware('auth:sanctum')->post('/logout',[LoginRegisterController::class, 'logout']);
+// Password forgot and rest
+Route::post('password/email',  ForgotPasswordController::class);
+Route::post('password/code/check', CodeCheckController::class);
+Route::post('password/reset', ResetPasswordController::class);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/create', [ProductController::class, 'create']);
+    Route::put('/products/update/{id}',[ProductController::class, 'update']);
+    Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
+
 });
-Route::patch('/products/update/{id}',[ProductController::class, 'update']);
 Route::get('/phpinfo', function () {
     return phpinfo();
 });
@@ -55,7 +65,6 @@ Route::get('/products/rand', [ProductController::class, 'getProductsRandom']);
 Route::get('/products/news', [ProductController::class, 'getNewestProducts']);
 
 Route::get('/products/{id}',[ProductController::class, 'show']);
-Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
 //Route::apiResource('/products',ProductController::class);
 // CRUD Category
 
