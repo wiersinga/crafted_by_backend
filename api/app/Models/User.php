@@ -72,40 +72,18 @@ class User extends Authenticatable
         return $this->hasOne(Artist::class);
     }
 
-//    public function artists(): HasMany
-//    {
-//        return $this->hasMany(Artist::class);
-//    }
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
 //    public function reviews(): HasMany
 //    {
 //        return $this->hasMany(Review::class);
 //    }
-// Roles
 
-//    public function isArtist()
-//    {
-//        // Check if the user has an associated artist record
-//        return $this->artist()->exists();
-//    }
-   /* public function hasRole($role)
-    {
-        return $this->roles()->where('type', $role)->exists();
-    }
 
-    public function isAdmin()
-    {
-        return $this->hasRole('admin');
-    }
-
-    public function isBusinessOwner()
-    {
-        return $this->hasRole('artist');
-    }
-
-    public function isRegularUser()
-    {
-        return $this->hasRole('client');
-    }*/
 }
 
 
