@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
 
 use App\Http\Resources\AddressResource;
 use App\Models\Address;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 
 class AddressController extends Controller
 {
     public function index()
     {
+        $this->athorize('view',Address::class);
         return AddressResource::collection(Address::all());
     }
 
@@ -25,14 +26,21 @@ class AddressController extends Controller
         return $address;
     }
 
-    public function update(Request $request, Address $address)
+    public function update(Request $request, $id)
     {
+        $address = Address::findOrFail($id);
+        $this->authorize('update', $address);
         $address->update($request->all());
     }
 
-    public function destroy(Address $address)
+    public function destroy($id)
     {
+        $address = Address::findOrFail($id);
+        $this->authorize('delete', $address);
+
         $address->delete();
+        return ('The address is deleted !');
+
     }
 
     public function getAddressArtist($artistId){
