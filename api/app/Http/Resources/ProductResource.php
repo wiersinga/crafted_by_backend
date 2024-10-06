@@ -22,9 +22,11 @@ class ProductResource extends JsonResource
            'name'=>$this->resource->name,
             'description'=>$this->resource->description,
             'price'=>$this->resource->price,
+            'stock'=>$this->resource->stock,
             'category'=> new CategoryResource($this->resource->category),
             'artist'=> new ArtistResource($this->resource->artist),
             'materials' =>  MaterialResource::collection($this->resource->materials),
+            'product_image'=> $this->resource->product_image,
             //'reviews' =>  ReviewResource::collection($this->resource->reviews),
         ];
     }

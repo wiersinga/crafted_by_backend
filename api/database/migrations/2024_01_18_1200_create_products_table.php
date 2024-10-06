@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price',10,2);
             $table->string('product_image')->nullable();
-            $table->foreignUuid('category_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignUuid('artist_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignUuid('category_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('artist_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -21,10 +21,10 @@ class LoginRegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role_type'=> 'required|exists:App\Models\Role,type',
-            'siret' => 'required_if:role_type,artist|string', // Required if role_type is artist
+            'siret' => 'required_if:role_type,artist|string',
             'speciality_name'=> 'required_if:role_type,artist|exists:App\Models\Speciality,name',
-            'history' => 'required_if:role_type,artist|string', // Required if role_type is artist
-            'craftingDescription' => 'required_if:role_type,artist|string', // Required if role_type is artist
+            'history' => 'required_if:role_type,artist|string',
+            'craftingDescription' => 'required_if:role_type,artist|string',
         ]);
 
         if ($validator->fails()) {
@@ -41,9 +41,8 @@ class LoginRegisterController extends Controller
             'lastName' => $request->lastName,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => $role->id, // Use role id obtained from the query
+            'role_type'=> $role->type,
 
-            //'role_id'=> $request->role_id,
         ]);
 
 
@@ -78,8 +77,8 @@ class LoginRegisterController extends Controller
     public function login(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => 'required|email|regex:/^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$/',
+            'password' => 'required|min:8'
         ]);
 
         if($validate->fails()){
@@ -92,18 +91,10 @@ class LoginRegisterController extends Controller
 // check email exist
         $user = User::where('email', $request->email)->first();
 
-        if (!$user){
-            return response()->json([
-                'status'=> 'failed',
-                'message'=>'No Account yet'
-            ],401);
-        }
-
-        //check password
-        else if(!Hash::check($request->password, $user->password)) {
+        if(!$user || !Hash::check($request->password, $user->password) ){
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Invalid credentials'
+                'message' => 'Email ou mot de passe incorrect'
             ], 401);
         }
 

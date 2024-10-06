@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Http\Response;
@@ -14,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 use OpenApi\Attributes as OA;
+use Symfony\Component\HttpFoundation\Request;
 
 
 #[
@@ -72,17 +74,30 @@ class ProductController extends Controller
             new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
         ]
     )]
+
+
     public function create(StoreProductRequest $request)
     {
         $this->authorize('create', Product::class);
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/products', $imageName); // Store image in storage/app/public/products directory
+        }
+
             $product = Product::create($request->validated());
-            $material= Material::find($request->get('material_id'));
+            $material = Material::where('name', $request->get('MaterialName'))->first();
+
+        if ($material) {
             $product->materials()->attach($material);
+        } else {
+            return response()->json(['error' => 'Material not found'], 404);
+        }
             return new ProductResource($product);
     }
 
-    public function update(UpdateProductRequest $request, product $product, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
 
         $product = Product::findOrFail($id);
@@ -94,31 +109,10 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-
-//    public function store(StoreProductRequest $request)
-//    {
-//        $validatedData = $request->validated();
-////        $materialId = $request->get('material_id');
-////
-////        $material = Material::find($materialId);
-//
-////        if (!$material) {
-////            return response()->json(['error' => 'Material not found'], 404);
-////        }
-//
-//        $product = Product::create($validatedData);
-////        $product->materials()->attach($material);
-//
-//        return new ProductResource($product);
-//    }
-
-
     public function show($id)
     {
         return new ProductResource(Product::findOrFail($id));
     }
-
-
 
     public function destroy($id)
     {
@@ -138,7 +132,7 @@ class ProductController extends Controller
 
         return response()->json(['data'=>$products]);
     }
-    public function getNewestProducts(Product $product){
+    public function getNewestProducts(){
         $newestProducts = DB::table('products')
             ->orderBy('id', 'desc') // Order by ID in descending order (assuming ID is auto-incrementing)
             ->limit(12) // Adjust the limit as needed
@@ -252,6 +246,40 @@ class ProductController extends Controller
 //        $products = $artist->products;
 //        return $products;
 
+    public function getFilteredProducts(Request $request): JsonResponse
+    {
+        // Obtenir les paramètres de catégorie et de matériau depuis la requête
+        $categoryNames = $request->query('categoryNames');
+        $materialNames = $request->query('materialNames');
+
+        // Initialiser la requête de base
+        $query = DB::table('products')
+            ->select('products.id', 'products.name', 'products.description', 'products.price', 'products.product_image')
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.id'); // Utilisation de leftJoin pour inclure tous les produits même sans catégorie
+
+        // Ajouter la jointure pour les matériaux si nécessaire
+        if ($materialNames) {
+            $query->leftJoin('material_product', 'material_product.product_id', '=', 'products.id')
+                ->leftJoin('materials', 'material_product.material_id', '=', 'materials.id');
+        }
+
+        // Filtrer par catégories si elles sont fournies
+        if ($categoryNames) {
+            $categoryArray = explode(',', $categoryNames);
+            $query->whereIn('categories.name', $categoryArray);
+        }
+
+        // Filtrer par matériaux si ils sont fournis
+        if ($materialNames) {
+            $materialArray = explode(',', $materialNames);
+            $query->whereIn('materials.name', $materialArray);
+        }
+
+        // Exécuter la requête et récupérer les produits
+        $products = $query->distinct()->get();
+
+        return response()->json(['data' => $products]);
+    }
 
 
 }

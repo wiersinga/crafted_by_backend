@@ -47,8 +47,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/products/update/{id}',[ProductController::class, 'update']);
     Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
     Route::post('/users/post', [UserController::class, 'store']);
-
-
 });
 Route::get('/phpinfo', function () {
     return phpinfo();
@@ -67,6 +65,8 @@ Route::get('/products/rand', [ProductController::class, 'getProductsRandom']);
 Route::get('/products/news', [ProductController::class, 'getNewestProducts']);
 
 Route::get('/products/{id}',[ProductController::class, 'show']);
+
+//Route::get('/products', [ProductController::class, 'getFilteredProducts']);
 //Route::apiResource('/products',ProductController::class);
 // CRUD Category
 

@@ -35,8 +35,8 @@ class StoreArtistRequest extends FormRequest
     {
         return [
             'siret.required' => 'Siret is required',
-            'history.required' => 'The Name is required',
-            'craftingDescription.required' => 'The birthdate is required',
+            'history.required' => 'History is required',
+            'craftingDescription.required' => 'the description of your method is required',
         ];
     }
 }

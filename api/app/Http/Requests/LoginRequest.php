@@ -22,8 +22,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=> 'required|email',
-            'password'=> 'required|string|min:10'
+            'email'=> 'required|email|regex:/^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$/',
+            'password'=> 'required|string|min:8'
         ];
     }
 
@@ -33,7 +33,7 @@ class LoginRequest extends FormRequest
             'email.required'=>'Email is required',
             'email.email'=>'Input does not have the Email form',
             'password.required'=>'Password is required',
-            'password.min:10'=>'Password must have at least 10 characters'
+            'password.min:10'=>'Password must have at least 8 characters'
         ];
     }
 }

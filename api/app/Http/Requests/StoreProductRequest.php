@@ -25,9 +25,11 @@ class StoreProductRequest extends FormRequest
             'name' =>'required|string',
             'description' => 'string',
             'price' => 'required|decimal:2',
-            'material_id'=> 'required|exists:App\Models\Material,id',
-            'category_id'=> 'required|exists:App\Models\Category,id',
+            'MaterialName'=> 'required|exists:App\Models\Material,name',
+            'categoryName'=> 'required|exists:App\Models\Category,name',
             'artist_id'=> 'required|exists:App\Models\Artist,id',
+            'product_image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'stock'=>'required|integer'
         ];
     }
 
@@ -36,9 +38,11 @@ class StoreProductRequest extends FormRequest
         return [
             'name.required' => 'The Name is required',
             'price.required' => 'The price is required',
-            'material.required' => 'Material(s) is/are required',
-            'category.required'=> 'Category is required',
+            'MaterialName.required' => 'Material(s) is/are required',
+            'categoryName.required'=> 'Category is required',
             'artist.required'=>'Artist is required',
+            'product_image.required'=>'Product image is required',
+            'product_image.image'=>'Product image must be an image',
         ];
     }
 }
